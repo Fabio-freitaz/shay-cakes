@@ -3,11 +3,10 @@ export const PRODUCTS = [
     id: 1,
     name: 'Bolo de Cenoura com Chocolate',
     description: 'Massa fofinha e artesanal com uma cobertura generosa de brigadeiro cremoso.',
-    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600&h=400',
+    image: 'imagem.jpg',
     sizes: [
       { label: 'P (1kg)', price: 40.00 },
-      { label: 'M (2kg)', price: 80.00 },
-      { label: 'G (3kg)', price: 120.00 }
+      { label: 'M (2kg)', price: 80.00 }
     ]
   },
   {
@@ -23,9 +22,9 @@ export const PRODUCTS = [
   },
   {
     id: 3,
-    name: 'Docinhos Gourmet',
+    name: 'Docinhos',
     description: 'Caixa com brigadeiros, beijinhos e surpresas de uva feitos com ingredientes premium.',
-    image: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=600&h=400',
+    image: 'imagem1.jpg',
     sizes: [
       { label: '25 un', price: 45.00 },
       { label: '50 un', price: 85.00 },

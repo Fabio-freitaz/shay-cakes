@@ -23,7 +23,7 @@ export default function OrderForm({ cart, onRemove, formData, setFormData, onCha
     if (cart.length === 0) return alert("Seu carrinho está vazio!");
     if (!formData.horaEntrega) return alert("Por favor, escolha um horário!");
 
-    const meuNumero = "5584981369996"; 
+    const meuNumero = "558498136999"; 
     const dataBR = formData.dataEntrega.split('-').reverse().join('/');
     const itensTexto = cart.map(item => `- ${item.name} (${item.price})`).join('%0A');
     const totalFormatado = total.toFixed(2).replace('.', ',');
