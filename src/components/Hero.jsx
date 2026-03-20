@@ -17,7 +17,7 @@ export default function Hero() {
         {/* Lado Esquerdo: Texto e Botão Único */}
         <div className="flex-1 text-center md:text-left z-10">
           <span className="inline-block px-4 py-1 rounded-full bg-white text-[#8FB9A8] text-sm font-bold mb-4 shadow-sm">
-            🍰 Confeitaria Artesanal
+            🍰 Confeitaria
           </span>
           <h2 className="text-4xl md:text-6xl font-bold text-slate-800 mb-4 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
             Bolos e doces artesanais feitos com carinho

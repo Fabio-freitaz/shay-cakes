@@ -6,7 +6,7 @@ return(
 
 <p>Shay Cakes Confeitaria</p>
 
-<p>@shaycakes.confeitaria</p>
+<p>@shaycakes_tabatinga</p>
 
 <p>Praia Barra de Tabatinga RN</p>
 
