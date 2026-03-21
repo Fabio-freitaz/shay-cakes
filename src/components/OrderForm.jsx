@@ -7,8 +7,7 @@ const TAXAS_ENTREGA = {
   "Búzios": 7.00,
   "Pirangi": 10.00,
   "Camurupim": 10.00,
-  "Barreta": 8.00,
-  "Outras Localidades": 15.00
+  "Barreta": 8.00
 };
 
 export default function OrderForm({ cart, onRemove, formData, setFormData, onChange, setCart }) {
@@ -29,11 +28,11 @@ export default function OrderForm({ cart, onRemove, formData, setFormData, onCha
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const meuNumero = "5584981369994";
+    const meuNumero = "5584981369996";
     const dataBR = formData.dataEntrega.split('-').reverse().join('/');
     const itensTexto = cart.map(item => `• ${item.name} (${item.price})`).join('\n');
     
-    const mensagemRaw = `🌸 *Novo Pedido - Shay Cakes* 🌸\n\n` +
+    const mensagemRaw = ` *Novo Pedido - Shay Cakes* \n\n` +
       `*Cliente:* ${formData.nome}\n\n` +
       `*ITENS:*\n${itensTexto}\n\n` +
       `*Subtotal:* R$ ${subtotal.toFixed(2).replace('.', ',')}\n` +
