@@ -68,7 +68,7 @@ export default function OrderForm({ cart, onRemove, formData, setFormData, onCha
             <span className="text-4xl">🌙</span>
             <h2 className="text-xl font-bold text-slate-800 mt-4">Estamos descansando!</h2>
             <p className="text-slate-500 text-sm mt-2">
-              A Shay Cakes abre todos os dias das 08:00 às 18:00. <br/>
+              A Shay Cakes abre todos os dias das 07:00 às 18:00. <br/>
               Aguardamos sua encomenda amanhã!
             </p>
          </div>
