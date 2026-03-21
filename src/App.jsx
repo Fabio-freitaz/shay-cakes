@@ -9,6 +9,8 @@ import Footer from './components/Footer';
 export default function App() {
   const [cart, setCart] = useState([]);
   const [formData, setFormData] = useState({
+    bairro: '',
+    horaEntrega: '',
     nome: '', 
     tipoEntrega: 'Retirada', 
     endereco: '', 
@@ -30,13 +32,9 @@ export default function App() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const scrollToForm = () => {
-    document.getElementById('encomenda')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-800">
-      <Header onScroll={scrollToForm} />
+      <Header />
       <main>
         <Hero />
         <Products onAddToCart={addToCart} />

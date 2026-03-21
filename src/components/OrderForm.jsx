@@ -1,7 +1,7 @@
 import React from 'react';
-import { MessageCircle, Trash2, ShoppingBag, Truck } from 'lucide-react';
+import { MessageCircle, Trash2, ShoppingBag } from 'lucide-react';
 
-// 📍 LISTA DE BAIRROS E TAXAS REAIS (Ajuste os valores se precisar)
+// 📍 LISTA DE BAIRROS E TAXAS REAIS
 const TAXAS_ENTREGA = {
   "Barra de Tabatinga": 5.00,
   "Búzios": 7.00,
@@ -10,8 +10,17 @@ const TAXAS_ENTREGA = {
   "Barreta": 8.00
 };
 
+// FUNÇÃO PARA VERIFICAR SE ESTÁ ABERTO
+const verificarLojaAberta = () => {
+  const agora = new Date();
+  const horaAtual = agora.getHours();
+  return horaAtual >= 8 && horaAtual < 18; // Aberto das 08h às 18h
+};
+
 export default function OrderForm({ cart, onRemove, formData, setFormData, onChange, setCart }) {
+  const lojaAberta = verificarLojaAberta();
   const hoje = new Date().toISOString().split('T')[0];
+  
   const horarios = [];
   for (let h = 8; h <= 20; h++) {
     horarios.push(`${h.toString().padStart(2, '0')}:00`, `${h.toString().padStart(2, '0')}:30`);
@@ -28,11 +37,13 @@ export default function OrderForm({ cart, onRemove, formData, setFormData, onCha
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (cart.length === 0) return alert("Adicione itens ao carrinho primeiro!");
+    
     const meuNumero = "5584981369996";
     const dataBR = formData.dataEntrega.split('-').reverse().join('/');
     const itensTexto = cart.map(item => `• ${item.name} (${item.price})`).join('\n');
     
-    const mensagemRaw = ` *Novo Pedido - Shay Cakes* \n\n` +
+    const mensagemRaw = `🌸 *Novo Pedido - Shay Cakes* 🌸\n\n` +
       `*Cliente:* ${formData.nome}\n\n` +
       `*ITENS:*\n${itensTexto}\n\n` +
       `*Subtotal:* R$ ${subtotal.toFixed(2).replace('.', ',')}\n` +
@@ -49,6 +60,22 @@ export default function OrderForm({ cart, onRemove, formData, setFormData, onCha
     alert("Pedido enviado! ✨");
   };
 
+  // SE A LOJA ESTIVER FECHADA, MOSTRA O AVISO EM VEZ DO FORMULÁRIO
+  if (!lojaAberta) {
+    return (
+      <div className="py-20 text-center bg-[#FDF8F9]">
+         <div className="max-w-md mx-auto p-8 bg-white rounded-[2rem] shadow-sm border border-slate-100">
+            <span className="text-4xl">🌙</span>
+            <h2 className="text-xl font-bold text-slate-800 mt-4">Estamos descansando!</h2>
+            <p className="text-slate-500 text-sm mt-2">
+              A Shay Cakes abre todos os dias das 08:00 às 18:00. <br/>
+              Aguardamos sua encomenda amanhã!
+            </p>
+         </div>
+      </div>
+    );
+  }
+
   return (
     <section id="encomenda" className="py-20 bg-[#FDF8F9]">
       <div className="max-w-3xl mx-auto px-4">
@@ -58,7 +85,6 @@ export default function OrderForm({ cart, onRemove, formData, setFormData, onCha
           </div>
           
           <div className="p-6 space-y-6">
-            {/* RESUMO DO CARRINHO */}
             <div className="bg-slate-50 p-4 rounded-2xl border-2 border-dashed border-slate-200">
               <ul className="space-y-2">
                 {cart.map((item) => (
@@ -94,7 +120,6 @@ export default function OrderForm({ cart, onRemove, formData, setFormData, onCha
                 <button type="button" onClick={() => setFormData({...formData, tipoEntrega: 'Entrega'})} className={`p-4 rounded-xl border-2 font-bold transition-all ${formData.tipoEntrega === 'Entrega' ? 'bg-[#8FB9A8] text-white border-[#8FB9A8]' : 'bg-white text-slate-400 border-slate-100'}`}>Entrega</button>
               </div>
 
-              {/* CAMPOS DE ENTREGA */}
               {formData.tipoEntrega === 'Entrega' && (
                 <div className="space-y-4 animate-in fade-in slide-in-from-top-2">
                   <select required name="bairro" value={formData.bairro} onChange={onChange} className="w-full p-4 bg-slate-50 rounded-xl outline-none border-2 border-transparent focus:border-[#8FB9A8]">
@@ -117,17 +142,15 @@ export default function OrderForm({ cart, onRemove, formData, setFormData, onCha
 
               <textarea name="observacao" value={formData.observacao} onChange={onChange} placeholder="Observações (opcional)" rows="2" className="w-full p-4 bg-slate-50 rounded-xl outline-none" />
               
-             {/* BOTÃO DE ENVIO - SEMPRE ATIVO */}
-              {/* BOTÃO QUE MUDA DE COR CONFORME O CARRINHO */}
-                 <button 
-               type="submit" 
-              disabled={cart.length === 0}
-               className={`w-full py-5 rounded-2xl font-bold text-xl flex items-center justify-center gap-3 shadow-lg transition-all active:scale-95 
-               ${cart.length > 0 
-                 ? 'bg-[#25D366] hover:bg-[#1eb956] text-white cursor-pointer shadow-green-200' : 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none'}`}>
-             <MessageCircle size={28} /> 
-              <span>Enviar no WhatsApp</span>
-                </button>
+              <button 
+                type="submit" 
+                disabled={cart.length === 0}
+                className={`w-full py-5 rounded-2xl font-bold text-xl flex items-center justify-center gap-3 shadow-lg transition-all active:scale-95 
+                ${cart.length > 0 ? 'bg-[#25D366] hover:bg-[#1eb956] text-white cursor-pointer shadow-green-200' : 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none'}`}
+              >
+                <MessageCircle size={28} /> 
+                <span>Enviar no WhatsApp</span>
+              </button>
             </form>
           </div>
         </div>
